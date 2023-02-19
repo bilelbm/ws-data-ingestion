@@ -11,8 +11,8 @@ functions:
     events:
       - sqs:
           arn: arn:aws:sqs:region:us-east-1:BTC_QUEUE
-          maximumConcurrency: 10
-          batchSize: 10 # this is variable based on the performance of the db when using localstack max is set to 10 strictly
+          maximumConcurrency: 100
+          batchSize: 5 # this is variable based on the performance of the db when using localstack max is set to 10 strictly
 
 custom:
   serverless-offline-sqs-external:
@@ -20,7 +20,7 @@ custom:
     apiVersion: "2012-11-05"
     host: localhost
     port: 4566
-    https: false # default false
+    https: false
     region: us-east-1
     accessKeyId: root
     secretAccessKey: root

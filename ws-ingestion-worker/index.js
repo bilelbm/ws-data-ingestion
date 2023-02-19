@@ -28,6 +28,7 @@ const cs = new pgp.helpers.ColumnSet([
 ], {table: 'instrument'});
 
 const consumer = async (event) => {
+  console.log(`Got batch with size: ${event.Records.length}`)
   const insert = pgp.helpers.insert(event.Records.map(record => JSON.parse(record.body)), cs);
   return db.none(insert)
     .catch(error => {
