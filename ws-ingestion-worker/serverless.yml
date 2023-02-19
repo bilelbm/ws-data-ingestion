@@ -1,0 +1,31 @@
+service: ws-ingestion-worker
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  instrumentConsumer:
+    handler: index.consumer
+    events:
+      - sqs:
+          arn: arn:aws:sqs:region:us-east-1:BTC_QUEUE
+          maximumConcurrency: 10
+          batchSize: 10 # this is variable based on the performance of the db when using localstack max is set to 10 strictly
+
+custom:
+  serverless-offline-sqs-external:
+    autoCreate: true # create queue if not exists
+    apiVersion: "2012-11-05"
+    host: localhost
+    port: 4566
+    https: false # default false
+    region: us-east-1
+    accessKeyId: root
+    secretAccessKey: root
+    skipCacheInvalidation: false
+
+plugins:
+  - serverless-offline-sqs-external
+  - serverless-offline

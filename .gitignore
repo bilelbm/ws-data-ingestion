@@ -1,0 +1,5 @@
+./public/websocket-example/node_modules
+./public/websocket-example/package-lock.json
+./ws-ingestion-worker/node_modules
+./ws-ingestion-worker/package-lock.json
+./postgres-data
